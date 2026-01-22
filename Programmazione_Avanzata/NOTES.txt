@@ -1,0 +1,26 @@
+Types of ASSOCIATION(a.):
+* 1-to-1
+* 1-to-1-to-1: Ternary a.
+* Composition: 
+
+// Inline-Comments
+/*
+Multiline
+Comments
+*/
+
+Scope Resolution Operator(::) => scope_name::identifier
+    Access identifiers defined inside some other scope in the current scope.
+    Ex.
+        std::cout // cout is defined into the namespace std
+    Ex. // main.cpp
+        #include <iostream>
+        using namespace std;
+
+        int x = 3; // GLOBAL VARIABLE
+        int main() {
+            cout << ::x; // ACCESS GLOBAL VARIABLE EX
+            return 0;
+        }
+
+

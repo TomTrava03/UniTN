@@ -1,0 +1,13 @@
+BASICS
+    LEARNING PROCESS:
+    - DATA AQUISITION: involves collecting relevant data for the problem at hand.
+
+    - DATA PREPROCESSING: data needs to be 'cleaned' and prepared for analysis.
+        Handling missing value, dealing with outliers. Techniques: normalization, feature scaling
+        and handling categorical variables.
+
+    - DIMENSIONALITY REDUCTION: is the reduction of number of features while preserving the most 
+        important information.
+
+    - MODEL LEARNING: a model is trained on the preprocessed data to learn patterns and relationships.
+        Algorithms: linear regression, decision tree, support vector machines & neural networks        

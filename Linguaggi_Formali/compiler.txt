@@ -1,0 +1,25 @@
+COMPILER:
+    - GRAMMAR: states and form of an assignment
+
+    - LEXICAL ANALYSIS: translates a stream of characters into a stream of tokens
+        ex. pippo = 2*3; -> <ID, pippo> ASS <NUM, 2> MUL <NUM, 3> SEMCOL 
+
+    - SYNTAX ANALYSIS: checks whether a stream of tokens adheres to the given grammar.
+        If so, converts the stream of tokens into a parse tree (AST)
+
+    - INTERMEDIATE CODE GENERATION: converts a AST into a textual intermediate code
+        ex. 
+            MOVE 2, R1
+            MULT 3, R1
+            MOVE R1, RD
+
+    - TARGET CODE GENERATION: translates intermediate code into target machine code
+
+GENERATIVE GRAMMARS:
+    - Vocabulary(symbols): 
+        i.  terminals: play the tokens of the out stream of LEXICAL ANALYSIS
+        ii. non-terminals: chosen as start symbol
+    
+    - Productions: rules for rewriting strings into strings (with at a least a non-terminal)
+
+

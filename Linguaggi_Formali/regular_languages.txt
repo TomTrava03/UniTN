@@ -1,0 +1,51 @@
+REGULAR LANGUAGES
+    - L = {a^n*b^n|n>0} is a FREE language
+    - STACK seems ideal to recognize words in L
+    - Read the string ONE symbol at a time
+
+    - REGULAR GRAMMARS: FREE grammars with productions of the form
+
+    - REGEX(REGULAR EXPRESSION):
+        Alphabet A and a number of operators
+        Define regexes inductively:
+            Base:
+                Every a in A is a regex
+                e is a regex
+            Step:
+                (Alternation)   r1|r2
+                (Concatenation) r1r2
+                (Kleene star)   r1*
+                (Parentheses)   (r1)
+
+        DENOTED LANGUAGE(L(r)): is also inductively defined on the structure of r
+            Base:
+                L(a) = {a} for every a in A
+                L(e) = {e}
+            Step:
+                IF r = r1|r2 then L(r) = L(r1) U L(r2)
+                IF r = r1r2 then L(r) = {w1w2|w1 in L(r1) and w2 in L(r2)}
+                IF r = r1* then L(r) = {e} U {w1w2...wk | k >= 1 and for all i : 1 <= i <= k.wi
+                    in L(r1)
+                }
+                IF r = (r1) then L(r) = L(r1)
+
+        CONVENTIONS(Precedence): Kleene star > Concatenation > Alternation
+            ex.
+            (a|bc*) == (a|(b(c*)))
+
+    - FINITE STATE AUTOMATA: used to decide whether a word belongs to the language denoed by a 
+      regex
+
+        Non-deterministic finite state automata(NFA): 
+        tuple (S, A, move_n, S0, F)
+            S: set of states
+            A: alphabet (e is NOT in A)
+            s0 in S: INITIAL state
+            F 
+
+        
+
+
+        Deterministic finite state automata(DFA)
+
+    

@@ -1,0 +1,16 @@
+Lod (Logic of Descriptions)
+    Etype percepts:
+        - \top : ALL entities 
+        - \bot : empty set 
+        - <ename> : entities called ename
+        - \exist<eproperty>.<ename> : entities which have - at least - <eproperty> that is <ename>
+        - \forall<eproperty>.<ename> : entities whose <eproperty> are ONLY <ename>
+        - Integer : set of Integers
+
+    Nested etype percepts:
+        - \exist<eproperty1>.(\exist<eproperty2>.<ename>) : entities which <eproperty1> - at least -
+            with entities which have - at least - <eproprerty2> that is <ename>
+
+    Composite etype percepts:
+        - <ename1> \sqcap \exist<eproperty>.<ename2>
+        - <ename1> \sqcup <ename2> 

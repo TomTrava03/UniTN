@@ -1,0 +1,21 @@
+LoE (Logic of Entities)
+    - Domain D = <U, {C}, {R}>
+        - U: universe of interpretation. {u}: set of units
+        - {C}: set of classes of units
+        - {R}: set of binary relations between units
+
+    - model M
+    - assertions:
+        - E(e): entity e is of etype E
+        - D(v): value v is of etype D
+        - O(e1, e2): object property O holds between e1 and e2
+        - A(e, v): data property A of entity e has value v
+    - interpretation functions I: L -> D
+    - theories T
+
+    Entailment (|=)
+
+    OWA (Open World Assumption): returns IDK when entailment does not hold.
+
+    CWA (Closed World Assumption): returns <E(e) is FALSE> when entailment does not hold.
+        Partial knowledge -> negative knowledge

@@ -26,7 +26,7 @@ void main() {
     int fd = open("path.txt", O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
     /*
      * flags O_RDONLY, O_WRONLY, O_RDWR (uno e obbligatorio), O_CREAT, O_EXCL, O_APPEND, O_TRUNC
-     * modes S_S_IRUSR, S_IWUSR, S_IXUSR, S_IRWXU, S_IRGRP, …, S_IROTH
+     * modes S_IRUSR, S_IWUSR, S_IXUSR, S_IRWXU, S_IRGRP, …, S_IROTH
      * */
 
     write(fd, "STRINGA", strlen("STRINGA"));

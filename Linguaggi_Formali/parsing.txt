@@ -1,0 +1,132 @@
+PARSING:    
+    - Given a grammar G=(V,T,S,P) and a word w
+    - Say whether w is in L(G) and, if so, provide the derivation tree
+        ex.
+            S 
+           /|\
+          a S b
+           /|\
+          C S d
+          | |
+          c e 
+
+    i.  TOP-DOWN: construct leftmost derivation from the root to the yield
+        ex. becomes 
+            S -> aSb
+            S -> CSd
+            C -> c
+            S -> e
+
+            Let w = bd and G:   S -> Ad | Bd
+                                A -> e
+                                B -> b
+            Derive w:
+                with S -> Ad, we fail
+                with S -> Bd, (B -> b), S -> bd, OK!
+
+
+        PREDICTIVE TOP-DOWN: we avoid backtracking applying a specific sub-class of free grammars:
+        LL(1) Grammars ->   We provide the leftmost derivation of the given string (L) by reading
+                            the string from the left (L) one symbol at a time(1)
+        ex.
+            E -> TE'
+            E'-> +TE'| e
+            T -> FT' 
+            T'-> *FT'| e
+            F -> (E) | id
+
+            PARSING TABLE: the entry M[A, b] is consulted to expand A when the next input character
+            is b. 
+            Then M[A, b] = A -> a if:
+                - it's possible to derive from 'a' string starting with b. 
+                    - a => *bB for some B
+                - or 'a' can derive 'e' and in some derivation A is followed by some 'y' from which
+                  it is possible to derive a string starting with b
+                    - a => *e & S => *wAy for some w and y with y => *bB for some B
+            ex. 
+                S -> aA | bB
+                A -> c
+                B -> c
+                
+                Table:
+                    a   |   b   |   c   |   $   |
+                S S->aA | S->bB |   -   |   -   |
+                A   -   |   -   |  A->c |   -   | 
+                B   -   |   -   |  B->c |   -   |
+
+            FIRST(a): set of terminals that begin strings derived from 'a',
+                a => *e then e is in FIRST(a)
+
+                FIRST(e) = {e}
+                FIRST(a) = {a}
+                FIRST(A) = U_{A->a} FIRST(a)
+                Computation of FIRST(a) for a = Y1...Yn:
+
+                    FIRST(Y1...Yn) = (/);
+                    j = 1;
+                    while j <= n do
+                        add FIRST(Yj)\{e} to FIRST(Y1...Yn);
+                        if e is in (Yj) then
+                            j = j + 1;
+                        else
+                            break;
+                    if j = n + 1 then
+                        add e to FIRST()
+
+            FOLLOW(a): set of terminals that can FOLLOW A in some derivation
+                
+                FOLLOW(S) = {$};
+                foreach A != S do
+                    FOLLOW(A) = (/);
+                repeat
+                    foreach B -> aAB do
+                        if B != then
+                            add FIRST(B)\{e} to FOLLOW(A);
+                        if B = e || e is in FIRST(B) then
+                            add FOLLOW(B) to FOLLOW(A);
+                until saturation;
+
+            CONSTRUCTION OF PREDICTIVE PARSSING TABLES:
+                
+                Input: Grammar G = (V,T,S,P)
+                Ouput: Predictive parsing table M
+                foreach A -> a is in P do
+                    add A -> a to M[A, b] for each b is in FIRST(a);
+                    if e is in FIRST(a) then
+                        add A -> a to M[A, x] for each x is in FOLLOW(a);
+
+                set to error() ALL empty entries;
+
+        LL(1) grammars: a context-free grammar is LL(1) if no entry of the predictive parsing table
+        for G is multipy-defined
+            
+            PREDICTIVE TOP-DOWN PARSING
+                Input: string w, parsing table M for G=(V,T,S,P)
+                Ouput: leftmost derivation of w if w is in L(G), error() otherwise
+                Init.: w$ in the input buffer, $S onto the stack, with S on top
+
+                let b = first(w$)
+                let X = top(stack)
+                while X != $ do
+                    if X = b then
+                        pop X;
+                        let b = next(w$);
+                    else if X == terminal then
+                        error();
+                    else if M[X, b] == error then
+                        error();
+                    else if M[X, b] == X -> Y1...Yk then
+                        output(X->Y1...Yk);
+                        pop X;
+                        push Yk; ...; push Y1;
+                        let X = top(stack);
+
+
+    ii. BOTTOM-UP: construct the rightmost derivation (in reverse order) from the yield to the root
+        ex. becomes
+            C -> c
+            S -> e
+            S -> CSd
+            S -> aSb
+
+
